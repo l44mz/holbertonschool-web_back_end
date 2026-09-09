@@ -6,7 +6,13 @@ Script that provides some stats about Nginx logs stored in MongoDB
 from pymongo import MongoClient
 
 
-if __name__ == "__main__":
+def log_stats():
+    """
+    Connects to the logs.nginx collection in MongoDB and prints stats:
+    - total number of documents
+    - number of documents per HTTP method (GET, POST, PUT, PATCH, DELETE)
+    - number of documents with method=GET and path=/status
+    """
     client = MongoClient('mongodb://127.0.0.1:27017')
     nginx_collection = client.logs.nginx
 
@@ -23,3 +29,7 @@ if __name__ == "__main__":
         {"method": "GET", "path": "/status"}
     )
     print("{} status check".format(status_check))
+
+
+if __name__ == "__main__":
+    log_stats()
