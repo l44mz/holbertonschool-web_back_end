@@ -5,7 +5,9 @@ class StudentsController {
     readDatabase(process.argv[2])
       .then((fields) => {
         const lines = ['This is the list of our students'];
-        const names = Object.keys(fields).sort((a, b) => a.toLowerCase().localeCompare(b.toLowerCase()));
+        const names = Object.keys(fields).sort((a, b) => (
+          a.toLowerCase().localeCompare(b.toLowerCase())
+        ));
 
         names.forEach((field) => {
           lines.push(`Number of students in ${field}: ${fields[field].length}. List: ${fields[field].join(', ')}`);
